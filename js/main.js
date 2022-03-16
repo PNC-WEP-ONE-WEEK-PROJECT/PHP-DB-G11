@@ -7,7 +7,7 @@ const dom_btn_add_post = document.querySelector(".btn-add-post");
 
 
 
-function hide(element) {
+function hide() {
     element.style.visibility = "hidden";
 }
 
