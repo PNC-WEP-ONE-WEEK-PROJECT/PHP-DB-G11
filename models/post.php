@@ -2,19 +2,13 @@
     require_once('database.php');
    
     // Add post
-    $description = $_POST['description'];
-    
     function createPost($description)
     {
         global $db;
-        $statement = $db -> prepare("INSERT INTO posts(postDate, description) values (now(), :description );");
+        $statement = $db -> prepare("INSERT INTO posts(postDate, description, user_ID) values (now(), :description, 1);");
         $statement -> execute([
-            ':description' => $description,
-    ]);
-    return $statement;
-}
-// if ($description != null ){
-    createPost($description);
-// }
-header('location: add_post.php');
+            ':description' => $description
+        ]);
+        return $statement;
+    }
 ?>

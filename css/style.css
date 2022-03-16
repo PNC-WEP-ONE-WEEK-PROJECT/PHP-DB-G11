@@ -2,7 +2,7 @@ body {
     background-color: rgb(204, 204, 204);
 }
 
-/* / GLOBAL STYLE / */
+/* GLOBAL STYLE */
 a {
     text-decoration: none;
     cursor: pointer;
@@ -13,7 +13,7 @@ a:hover {
 }
 
 
-/* / NAVIGATION BAR / */
+/* NAVIGATION BAR */
 #navigation {
     position: sticky;
     top: 0;
@@ -22,6 +22,10 @@ a:hover {
 
 .navbar {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+#nav-menu {
+    visibility: visible;
 }
 
 .logo {
@@ -37,7 +41,15 @@ a:hover {
 }
 
 
-/* Add post =============================================================*/
+/* ADD POST BUTTON */
+.btn-add-post {
+    border-radius: 10px;
+    width: 16%;
+    padding: 6px;
+}
+
+
+/* ADD POST */
 .add-text{
     height: auto;
     outline: none;
@@ -55,3 +67,4 @@ button{
     border-radius: 4px;
     border: none;
 }
+
