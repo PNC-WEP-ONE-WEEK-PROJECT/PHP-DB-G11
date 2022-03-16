@@ -1,7 +1,7 @@
 <?php
     require_once('database.php');
    
-    // Add post
+    // ADD POST
     function createPost($description)
     {
         global $db;
@@ -11,4 +11,26 @@
         ]);
         return $statement;
     }
+    
+    // DELETE POST
+    function deleteItem($item_delete)
+    {
+        global $db;
+        $statement = $db -> prepare('DELETE  FROM facebook where id = :item_delete;');
+        $statement -> execute([
+            ':item_delete' => $item_delete
+            ]);
+        return $statement ->rowCount() ==1;
+    
+    }   
+
+    // GET ID FROM DATABASE
+    function getItems()
+    {
+        global $db;
+        $statement = $db -> query('SELECT * FROM posts');
+        $items = $statement->fetchAll();
+        return $items;
+    }
+
 ?>
