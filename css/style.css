@@ -1,0 +1,57 @@
+body {
+    background-color: rgb(204, 204, 204);
+}
+
+/* / GLOBAL STYLE / */
+a {
+    text-decoration: none;
+    cursor: pointer;
+    color: black;
+}
+a:hover {
+    color: black;
+}
+
+
+/* / NAVIGATION BAR / */
+#navigation {
+    position: sticky;
+    top: 0;
+    z-index: 100000;
+}
+
+.navbar {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.logo {
+    width: 40px;
+}
+
+.menu {
+    width: 40%;
+}
+
+.menu-icon {
+    font-size: 35px;
+}
+
+
+/* Add post =============================================================*/
+.add-text{
+    height: auto;
+    outline: none;
+    resize: none;
+    overflow: hidden;
+}
+.add-photo{
+    height: 300px;
+}
+.img-text{
+    font-size: 25px;
+    font-weight: bold;
+}
+button{
+    border-radius: 4px;
+    border: none;
+}
