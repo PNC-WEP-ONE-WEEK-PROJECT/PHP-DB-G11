@@ -25,7 +25,7 @@ foreach ($posts as $post) {
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li><a href= "controllers/delete_post.php?post_ID=<?php echo $post['post_ID'] ?>" class="dropdown-item text-danger">Delete</a></li>
-                    <li><a class="dropdown-item text-primary">Edit</a></li>
+                    <li><a href="views/edit_post_view.php?postId=<?php echo $post["post_ID"] ?>" class="dropdown-item text-primary">Edit</a></li>
                 </ul>
             </div>
         </div>

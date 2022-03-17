@@ -42,4 +42,29 @@
         // print_r($posts);
         return $posts;
     }
+
+    // GET A POST BY ID
+    function getPostById($postId) 
+    {
+        global $db;
+        $statement = $db -> prepare("SELECT * FROM allPostsInfo WHERE allPostsInfo.post_ID=:postId;");
+        $statement -> execute([
+            ':postId' => $postId
+        ]);
+        $post = $statement->fetch();
+        return $post;
+    }
+
+    // UPDATE A POST
+    function updatePost($postId, $description) 
+    {
+        global $db;
+        $statement = $db -> prepare("UPDATE posts set description=:description, postDate=now() WHERE post_ID=:postId;");
+        $statement -> execute([
+            ':description' => $description,
+            ':postId' => $postId
+        ]);
+        return $statement->rowCount() == 1;
+    }
+
 ?>
