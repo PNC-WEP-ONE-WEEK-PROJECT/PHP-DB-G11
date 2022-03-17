@@ -12,8 +12,8 @@
                     </span>
                 </div>
                 <div class="w-50 me-0 m-auto d-flex mt-3">
-                    <button class="w-100 save btn-secondary me-2">Cancel</button>
-                    <button type="submit" class="w-100  save btn-success">Post</button>
+                    <button class="w-100 save btn-secondary  me-2"><a href="../index.php">Cancel</a></button>
+                    <button type="submit" class="w-100 p-2 save btn-primary">Post</button>
                 </div>
             </form>
         </div>

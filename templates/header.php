@@ -17,5 +17,4 @@
     <?php
         require_once("nav_bar.php");
     ?>
-
     <div class="container">

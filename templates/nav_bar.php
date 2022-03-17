@@ -1,3 +1,4 @@
+<!-- NAVIGATION BAR -->
 <nav id="navigation" class="navbar py-0 bg-light">
     <a class="navbar-brand px-3" href=""><img class="logo" src="../images/logo.png" alt=""></a>
     <ul class="nav nav-pills d-flex justify-content-between" id="nav-menu">

@@ -1,7 +1,7 @@
 <?php
     require_once('../models/post.php');
 
-    // Add post
+    // ADD POST
     $description = $_POST['description'];
     createPost($description);
     header('location: ../index.php');

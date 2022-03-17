@@ -3,15 +3,11 @@ require_once("templates/header.php");
 require_once("templates/btn_add_post.php");
 ?>
 
-
-
-
 <?php
-require_once("models/get_posts.php");
+require_once("models/post.php");
 $posts = getPosts();
 foreach ($posts as $post) {
 ?>
-
 
     <div class="card w-100 post border-0 mt-3">
         
@@ -23,19 +19,16 @@ foreach ($posts as $post) {
                     <p class="m-0"><?php echo $post["postDate"]; ?></p>
                 </div>
             </div>
-            <!-- <i class="material-icons post-menu">more_horiz</i> -->
-            <!-- Example single danger button -->
             <div class="btn-group">
                 <button type="button" class="bg-light" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="material-icons post-menu">more_horiz</i>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item text-danger">Delete</a></li>
+                    <li><a href= "controllers/delete_post.php?post_ID=<?php echo $post['post_ID'] ?>" class="dropdown-item text-danger">Delete</a></li>
                     <li><a class="dropdown-item text-primary">Edit</a></li>
                 </ul>
             </div>
         </div>
-
         <div class="card-body px-0 post-body w-100 border-0">
             <p><?php echo $post["description"] ?></p>
             <img class="w-100" src="images/image-62296af7108246.04371375.jpg" alt="">
@@ -52,14 +45,11 @@ foreach ($posts as $post) {
             </div>
         </div>
     </div>
-
-
 <?php
 };
 ?>
 
-
-
+<!-- FOOTER -->
 <?php
 require_once("templates/footer.php");
 ?>

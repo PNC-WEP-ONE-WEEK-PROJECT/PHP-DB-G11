@@ -11,12 +11,12 @@
         ]);
         return $statement;
     }
-    
+
     // DELETE POST
     function deleteItem($item_delete)
     {
         global $db;
-        $statement = $db -> prepare('DELETE  FROM facebook where id = :item_delete;');
+        $statement = $db -> prepare('DELETE  FROM posts where post_ID = :item_delete;');
         $statement -> execute([
             ':item_delete' => $item_delete
             ]);
@@ -33,4 +33,13 @@
         return $items;
     }
 
+    // GET ALL POSTS
+    function getPosts()
+    {
+        global $db;
+        $statement = $db->query("SELECT * FROM allpostsinfo");
+        $posts = $statement->fetchAll();
+        // print_r($posts);
+        return $posts;
+    }
 ?>
