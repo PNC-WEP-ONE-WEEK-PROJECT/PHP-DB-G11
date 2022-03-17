@@ -12,9 +12,4 @@
 </head>
 <body>
     <!-- NAVIGATION -->
-<section class="display-size w-50 m-auto bg-light">
-
-    <?php
-        require_once("nav_bar.php");
-    ?>
-    <div class="container">
+    <section class="display-size w-50 m-auto bg-light">

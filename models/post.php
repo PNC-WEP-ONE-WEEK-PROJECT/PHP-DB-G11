@@ -2,12 +2,13 @@
     require_once('database.php');
    
     // ADD POST
-    function createPost($description)
+    function createPost($description, $userID)
     {
         global $db;
-        $statement = $db -> prepare("INSERT INTO posts(postDate, description, user_ID) values (now(), :description, 2);");
+        $statement = $db -> prepare("INSERT INTO posts(postDate, description, user_ID) values (now(), :description, :userID);");
         $statement -> execute([
-            ':description' => $description
+            ':description' => $description,
+            ':userID' => $userID
         ]);
         return $statement;
     }
@@ -65,6 +66,26 @@
             ':postId' => $postId
         ]);
         return $statement->rowCount() == 1;
+    }
+
+    // REGISTER ACCOUNT, ADD DATA TO DB
+    function registerAccount($email, $firstName, $lastName, $password, $gender) 
+    {
+        global $db;
+        $statement = $db->query("insert into users(email, firstName, lastName, userPassword, gender)values('$email', '$firstName', '$lastName', '$password', '$gender');");
+    }
+
+    // GET USER INORMATION
+    function getUserByEmailAndPass($email, $password)
+    {
+        global $db;
+        $statement = $db -> prepare("select * from users where email=:email and userPassword=:password");
+        $statement -> execute([
+            ':email' => $email,
+            ':password' => $password
+        ]);
+        $user = $statement->fetch();
+        return $user;
     }
 
 ?>

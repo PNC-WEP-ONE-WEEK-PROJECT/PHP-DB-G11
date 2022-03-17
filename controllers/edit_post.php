@@ -6,7 +6,8 @@ require_once('../models/post.php');
     $postId = $_POST["postId"];
     $description = $_POST['description'];
     updatePost($postId, $description);
+    $userID = $_GET["userID"];
 
-    header('location: ../index.php');
-
+    header("location: ../pages/home.php?userID=$userID");
+    
 ?>

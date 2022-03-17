@@ -3,7 +3,7 @@
 ?>
     <div class="w-100 pb-3">
         <div class="card border-0 mt-2">
-            <form action="../controllers/create_post.php" method="post">
+            <form action="../controllers/create_post.php?userID=<?php echo $_GET["userID"]; ?>" method="post">
                 <div class="w-100">
                     <textarea name="description" class=" w-100 border-0 add-text" id="" cols="auto" placeholder="Your Caption Here" rows="auto"></textarea>
                 </div>

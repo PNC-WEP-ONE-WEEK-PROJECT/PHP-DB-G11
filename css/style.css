@@ -104,3 +104,36 @@ button{
 .post-footer {
     align-items: center;
 }
+
+
+/* REGISTER */
+.form-title p {
+    font-weight: bolder;
+    font-size: 22px;
+}
+
+.fill-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 13px;
+    margin-top: 20px;
+}
+
+.fill {
+    outline: none;
+    padding: 3px 0 3px 10px;
+}
+
+.btn-register {
+    margin-top: 25px;
+}
+
+.gender {
+    align-items: center;
+}
+.gender input {
+    transform: scale(1.2);
+}
+.gender label {
+    margin-left: 5px;
+}

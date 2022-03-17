@@ -3,6 +3,9 @@
 
     // ADD POST
     $description = $_POST['description'];
-    createPost($description);
-    header('location: ../index.php');
+    $userID = $_GET["userID"];
+    createPost($description, $userID);
+    $userID = $_GET["userID"];
+
+    header("location: ../pages/home.php?userID=$userID");
 ?>
