@@ -8,9 +8,7 @@ require_once("models/post.php");
 $posts = getPosts();
 foreach ($posts as $post) {
 ?>
-
     <div class="card w-100 post border-0 mt-3">
-        
         <div class="card-header px-0 py-2 post-header border-0 w-100 d-flex justify-content-between">
             <div class="post-owner d-flex w-100">
                 <a class="profile-contain d-flex" href=""><img src="images/image-62296add80e539.04751305.jpg" alt=""></a>
@@ -29,9 +27,10 @@ foreach ($posts as $post) {
                 </ul>
             </div>
         </div>
+
         <div class="card-body px-0 post-body w-100 border-0">
             <p><?php echo $post["description"] ?></p>
-            <img class="w-100" src="images/image-62296af7108246.04371375.jpg" alt="">
+            <img class="w-100" src="images/<?php echo $post['image'] ?>"  alt="">
         </div>
 
         <div class="card-footer px-0 w-100 py-0 mb-4 border-0 post-footer d-flex justify-content-between">
