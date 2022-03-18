@@ -12,7 +12,7 @@
     <!-- EDIT POST INTERFACE -->
     <div class="w-100 pb-3">
         <div class="card border-0 mt-2">
-            <form action="../controllers/edit_post.php" method="post">
+            <form action="../controllers/edit_post.php?userID=<?php echo $_GET["userID"]; ?>" method="post">
                 <input type="hidden" value=<?php echo $post["post_ID"]; ?> name="postId">
                 <div class="w-100">
                     <textarea name="description" class=" w-100 border-0 add-text" id="" cols="auto" placeholder="Your Caption Here" rows="auto"><?php echo $post["description"]; ?></textarea>

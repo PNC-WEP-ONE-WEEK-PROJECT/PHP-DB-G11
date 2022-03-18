@@ -2,6 +2,7 @@
 
 <?php
 
-    header('refresh:0; url=../index.php')
+    $userID = $_GET["userID"];
+    header("refresh:0; url=../pages/home.php?userID=$userID")
 
 ?>
