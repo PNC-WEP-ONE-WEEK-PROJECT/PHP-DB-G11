@@ -1,6 +1,6 @@
 
     <!-- FROM TO REGISTER ACCOUNT -->
-    <form class="py-5 m-4" action="../controllers/register_account.php" method="post">
+    <form class="py-5 m-4" action="../controllers/register_account_controller.php" method="post">
         <div class="form-title d-flex justify-content-center"><p class="text-primary">REGISTER ACCOUNT</p></div>
         <input class="w-100 fill" type="text" placeholder="Email address" name="email">
         <div class="w-100 fill-block">

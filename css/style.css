@@ -56,9 +56,9 @@ a:hover {
     resize: none;
     overflow: hidden;
 }
-.add-photo{
-    height: 300px;
-}
+/* .add-photo{
+    height: x;
+} */
 .img-text{
     background: rgb(197, 195, 195);
     font-size: 25px;

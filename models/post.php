@@ -10,7 +10,7 @@ require_once('database.php');
         if ($error === 0) {
             $img_ex = pathinfo($img_name, PATHINFO_EXTENSION); //GET EXTENSION
             $img_ex_lc = strtolower($img_ex); //CONVERT TO LOWERCASE
-            $allowed_exs = array("jpg", "jpeg", "png");
+            $allowed_exs = array("jpg", "jpeg", "png", "webp", "svg","jfif", "pjpeg" ,"pjp", "gif" ,"avif", "apng");
             if (in_array($img_ex_lc, $allowed_exs)) {
                 $new_img_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
                 $img_upload_path = '../images/' . $new_img_name;
@@ -33,6 +33,7 @@ require_once('database.php');
         ]);
         return $statement;
     }
+
 
 
     // DELETE POST
@@ -83,15 +84,17 @@ require_once('database.php');
 
 
     // UPDATE A POST
-    function updatePost($postId, $description)
+    function updatePost($postId, $description, $photo)
     {
         global $db;
-        $statement = $db->prepare("UPDATE posts set description=:description, postDate=now() WHERE post_ID=:postId;");
+        $statement = $db->prepare("UPDATE posts set description=:description, image=:image, postDate=now() WHERE post_ID=:postId;");
         $statement->execute([
             ':description' => $description,
-            ':postId' => $postId
-        ]);
+            ':image' => uploadImage($photo),
+            ':postId' => $postId  
+        ]);  
         return $statement->rowCount() == 1;
+        
     }
 
 

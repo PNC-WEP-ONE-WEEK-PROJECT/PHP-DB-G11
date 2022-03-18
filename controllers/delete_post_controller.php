@@ -4,5 +4,5 @@
     deleteItem($post_ID);
     $userID = $_GET["userID"];
     
-    header("location: ../pages/home.php?userID=$userID");
+    header("location: ../views/home_view.php?userID=$userID");
 ?>

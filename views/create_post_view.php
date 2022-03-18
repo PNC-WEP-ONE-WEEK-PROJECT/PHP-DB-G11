@@ -11,9 +11,8 @@
                 }
             ?>
         </span>
-        <form action="../controllers/create_post.php?userID=<?php echo $_GET["userID"]; ?>" method="post"
+        <form action="../controllers/create_post_controller.php?userID=<?php echo $_GET["userID"]; ?>" method="post"
             enctype="multipart/form-data">
-
             <div class="w-100">
                 <textarea name="description" class=" w-100 border-0 add-text" id="" cols="auto"
                     placeholder="Your Caption Here" rows="auto"></textarea>

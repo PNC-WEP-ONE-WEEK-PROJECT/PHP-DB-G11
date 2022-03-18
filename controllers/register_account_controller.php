@@ -12,5 +12,5 @@
 
     registerAccount($email, $firstName, $lastName, $password, $gender);
     $userID = getUserByEmailAndPass($email, $password)["user_ID"];
-    header("location: ../pages/home.php?userID=$userID");
+    header("location: ../views/home_view.php?userID=$userID");
 ?>

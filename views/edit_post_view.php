@@ -10,20 +10,22 @@
 ?>
 
     <!-- EDIT POST INTERFACE -->
-    <div class="w-100 pb-3">
+    <div class="w-100 p-2 pb-3">
         <div class="card border-0 mt-2">
-            <form action="../controllers/edit_post.php?userID=<?php echo $_GET["userID"]; ?>" method="post">
+            <form action="../controllers/edit_post_controller.php?userID=<?php echo $_GET["userID"]; ?>" method="post" enctype="multipart/form-data">
                 <input type="hidden" value=<?php echo $post["post_ID"]; ?> name="postId">
                 <div class="w-100">
                     <textarea name="description" class=" w-100 border-0 add-text" id="" cols="auto" placeholder="Your Caption Here" rows="auto"><?php echo $post["description"]; ?></textarea>
                 </div>
-                <div class="w-100 add-photo d-flex justify-content-center align-items-center bg-secondary">
-                    <span class="img-text h-100 w-100">
+                <div class="w-100 add-photo bg-secondary">
+                    <span class="">
+                        <input class=" upload-img" type="file" id="image" name="image">
                     </span>
+                    <img class="w-100"  src="../images/<?php echo $post['image'] ?>" alt="">
                 </div>
                 <div class="w-50 me-0 m-auto d-flex mt-3">
-                    <button class="w-100 save btn-secondary me-2"><a href="../index.php">Cancel</a></button>
-                    <button type="submit" class="w-100  save btn-success">Save</button>
+                    <button class="w-100 save btn-secondary me-2"><a href="../index.php"> Cancel</a></button>
+                    <button type="submit" class="w-100 p-2  save btn-primary">Save</button>
                 </div>
             </form>
         </div>
