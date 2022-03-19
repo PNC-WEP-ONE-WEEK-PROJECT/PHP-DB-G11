@@ -11,7 +11,11 @@
                 }
             ?>
         </span>
-        <form action="../controllers/create_post_controller.php?userID=<?php echo $_GET["userID"]; ?>" method="post"
+        <form action="<?php
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                require_once("../controllers/create_post_controller.php");
+            };
+        ?>" method="post"
             enctype="multipart/form-data">
             <div class="w-100">
                 <textarea name="description" class=" w-100 border-0 add-text" id="" cols="auto"
@@ -24,7 +28,7 @@
                 </span>
             </div>
             <div class="w-50 me-0 m-auto d-flex mt-3">
-                <button class="w-100 save btn-secondary  me-2"><a href="../index.php">Cancel</a></button>
+            <button class="btn-cancel-edit btn me-2" type="cancel"><a class="btn-secondary text-light" href="home_view.php">Cancel</a></button>
                 <button type="submit" class="w-100 p-2 save btn-primary">Post</button>
             </div>
         </form>
