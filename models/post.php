@@ -87,12 +87,22 @@ require_once('database.php');
     function updatePost($postId, $description, $photo)
     {
         global $db;
-        $statement = $db->prepare("UPDATE posts set description=:description, image=:image, postDate=now() WHERE post_ID=:postId;");
-        $statement->execute([
-            ':description' => $description,
-            ':image' => uploadImage($photo),
-            ':postId' => $postId  
-        ]);  
+        if ($photo['name'] == null){
+            $statement = $db->prepare("UPDATE posts set description=:description, postDate=now() WHERE post_ID=:postId;");
+            $statement->execute([
+                ':description' => $description,
+                ':postId' => $postId  
+                ]);  
+        }else{
+            $statement = $db->prepare("UPDATE posts set description=:description, image=:image, postDate=now() WHERE post_ID=:postId;");
+            $statement->execute([
+                ':description' => $description,
+                ':image' => uploadImage($photo),
+                ':postId' => $postId  
+                ]);  
+        }
+        
+        
         return $statement->rowCount() == 1;
         
     }

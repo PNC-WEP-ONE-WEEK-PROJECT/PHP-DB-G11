@@ -8,7 +8,6 @@ require_once('../models/post.php');
     $description = $_POST['description'];
     updatePost($postId, $description,$photo);
     $userID = $_GET["userID"];
-    print_r($photo);
     header("location: ../views/home_view.php?userID=$userID");
     
 ?>

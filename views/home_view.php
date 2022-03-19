@@ -5,12 +5,14 @@ require_once("btn_add_post_view.php");
 ?>
 
 <?php
+// CALL COMMENTS POST
+require_once("../controllers/post_comment_controller.php");
+
 // CALL FUNCTION OF POST INFORMATION
 require_once("../models/post.php");
 $posts = getPosts();
 foreach ($posts as $post) {
 ?>
-    
     <div class="card w-100 post border-0 mt-3">
         <div class="card-header px-0 py-2 post-header border-0 w-100 d-flex justify-content-between">
             <div class="post-owner d-flex w-100">
@@ -21,7 +23,7 @@ foreach ($posts as $post) {
                         <?php  
                         $dates = $post["postDate"]; 
                         $newDate = new DateTime($dates);
-                    echo $newDate->format("l jS F Y h:i:s A");
+                        echo $newDate->format("l jS F Y h:i:s A");
                     
                     ?></p>
                 </div>
@@ -46,11 +48,56 @@ foreach ($posts as $post) {
                 <i class="material-icons">thumb_up</i>
                 <span class="px-1"><?php echo $post["numberOfLikes"]; ?> Likes</span>
             </div>
-            <div class="d-flex comment reaction">
+            <a href="" class="d-flex comment reaction">
                 <i class="material-icons">comment</i>
                 <span class="px-1"><?php echo $post["numberOfComments"]; ?> Comments</span>
-            </div>
+            </a>
         </div>
+
+        <!--  -->
+        <dialog open class="w-75 show-comment overflow-scroll">
+            <div class="comment-controll w-100">
+                <div class="leav-comment text-secondary">
+                    <i class="material-icons ">keyboard_backspace</i>
+                </div>
+                
+                <iframe name="comment" style="display:none;"></iframe>
+                <form class="content-comment d-flex justify-content-end align-items-center" action="<?php
+                    if ($_SERVER["REQUEST_METHOD"] = "POST" and isset($_POST["comment"])) {
+                        $postID = $post["post_ID"];
+                        $userID = $_GET["userID"];
+                        require_once("../controllers/create_comment_controller.php?postID=$postID&userID=$userID");
+                    }
+                ?>" method="post" target="comment">
+                    <a href="" class="me-1" ><img class="img-pro rounded-circle" src="../images/logo.png" alt=""></a>
+                    <input name="comment" class="w-100 rounded-pill ps-3 pt-1 pb-2 h-100" placeholder="Type here..." type="text">
+                    <button class="bg-light" type="submit"><img class="img-send" src="../images/send.png" alt=""></button>
+                </form>
+                <hr>
+            </div>
+            <!-- GET COMMENTS -->
+            <div class="">
+                
+                <?php 
+                foreach($comments as $comment)  :
+                    if($post['post_ID'] == $comment['post_ID']){
+                    
+                ?>
+                <div class="content-comment mt-3 d-flex justify-content-end">
+                    <a href="" class="me-1" ><img class="img-pro rounded-circle" src="../images/logo.png" alt=""></a>
+                    <span class="rounded pt-0 px-2 h-100 border-2 border-primary bg-secondary "> 
+                        <?php 
+                            echo $comment['content'];
+                        ?> 
+                    </span>
+                    <button type="submit" ><i class="material-icons text-danger">delete_forever</i></a>
+                </div>
+
+                <?php
+                    };
+                endforeach ?>
+            </div>
+        </dialog>
     </div>
 <?php
 };

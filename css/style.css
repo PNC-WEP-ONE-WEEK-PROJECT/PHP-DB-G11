@@ -105,8 +105,37 @@ button{
 .post-footer {
     align-items: center;
 }
+dialog{
+    /* border: none; */
+}
+.img-pro{
+    width: 35px;
+    height: 35px;
+}
+.img-send{
+    width: 25px;
+    height: 25px;
 
+}
+.comment-controll{
+    position: sticky;
+    top: -20px;
+    background: #fff;
+    
+}
 
+.leav-comment{
+    cursor: pointer;
+    top: -12px;
+    left: 0px;
+    position: relative;
+}
+
+.show-comment{
+    height: 500px;
+    /* margin-top: 500px; */
+    position: relative;
+}
 
 
 
