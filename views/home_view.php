@@ -10,8 +10,9 @@ require_once("../models/post.php");
 if (isset($_SESSION["userID"]) and !empty($_SESSION["userID"])) {
     $posts = getPosts();
     if (!empty($posts)) {
-        foreach ($posts as $post) {
+        foreach ($posts as $index => $post) {
             $user = getUserById($post["user_ID"]);
+            
 ?>
     
     <div class="card w-100 post border-0 mt-3">
@@ -45,12 +46,28 @@ if (isset($_SESSION["userID"]) and !empty($_SESSION["userID"])) {
         </div>
 
         <div class="card-footer px-0 w-100 py-0 mb-4 border-0 post-footer d-flex justify-content-between">
-            <div class="d-flex like reaction">
-                <i class="material-icons">thumb_up</i>
-                <span class="px-1"><?php echo $post["numberOfLikes"]; ?> Likes</span>
-            </div>
+            <iframe name="like" style="display:none;"></iframe>
+            <form action="<?php
+                if ($_SERVER["REQUEST_METHOD"] = "POST") {
+                    require_once("../controllers/like_controller.php");
+                }
+            ?>" method="post" class="d-flex like reaction" target="like">
+                <input type="hidden" name="postID" value="<?php echo $post["post_ID"] ?>">
+                <button type="submit"><i onclick="increaseLike(<?php echo $index; ?>)" class="material-icons like like-icon" id="<?php echo $index; ?>">thumb_up</i></button>
+                <span class="px-1"><small class="numberOfLikes" id="<?php echo $index; ?>"><?php echo $post["numberOfLikes"]; ?></small> Likes</span>
+
+                <!-- SCRIPT TO INCREASE LIKE AND CHANGE COLOR-->
+                <script>
+                    function increaseLike(number) {
+                        currentLike = document.querySelectorAll(".numberOfLikes")[number].textContent;
+                        document.querySelectorAll(".numberOfLikes")[number].textContent = parseInt(currentLike) + 1;
+                        document.querySelectorAll(".like-icon")[number].style.color = "blue";
+                    }
+                </script>
+            </form>
+
             <div class="d-flex comment reaction">
-                <i class="material-icons">comment</i>
+                <i class="material-icons comment">comment</i>
                 <span class="px-1"><?php echo $post["numberOfComments"]; ?> Comments</span>
             </div>
         </div>

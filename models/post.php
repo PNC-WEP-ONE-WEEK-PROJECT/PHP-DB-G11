@@ -163,4 +163,12 @@ require_once('database.php');
         global $db;
         $statement = $db->query("update users set firstName='$firstName', lastName='$lastName', gender='$gender', dateOfBirth='$dateOfBirth', phone='$phone', email='$email' where user_ID=$userID;");
     }
+
+    // INCREASE LIKE
+    function likePost($userID, $postID) 
+    {
+        global $db;
+        $statement = $db->query("INSERT INTO likes(user_ID, post_ID) VALUES($userID, $postID);");
+    }
+
 ?>

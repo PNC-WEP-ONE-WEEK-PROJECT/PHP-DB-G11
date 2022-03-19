@@ -114,9 +114,19 @@ button{
     justify-content: center;
     background: rgb(197, 195, 195);
     cursor: pointer ;
+}
+
+/* LIKE */
+.reaction i{
+    cursor: pointer;
+}
+
+.reaction .like:active {
+    color: blue;
+}
+
 
 /* REGISTER */
-}
 .form-title p {
     font-weight: bolder;
     font-size: 22px;
