@@ -19,10 +19,8 @@ function createComment($content, $postID,$userID)
 function postComment($postID)
     {
         global $db;
-        $statement = $db->prepare("SELECT * FROM comments where post_ID = :postID");
-        $statement->execute([
-            ":postID" => $postID
-        ]);
+        $statement = $db->prepare("SELECT * FROM comments");
+        $statement -> execute();
         $items = $statement -> fetchAll();
         return $items;
     }

@@ -1,6 +1,5 @@
 <?php
     require_once("../models/comment.php");
-    $postID = 170;
+    $postID = $post['post_ID'];
     $comments = postComment($postID);
-    // header("location: ../controllers/post_comment_contrller.php");
 ?>

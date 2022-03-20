@@ -2,11 +2,10 @@
     require_once("../models/comment.php");
     if (!empty($_POST['comment'])) {
         $content = $_POST['comment'];
-        // $userID = $_GET["userID"];
-        // $postID = $_GET["postID"];
+        $userID = $_GET["userID"];
+        $postID = $_GET["postID"];
         createComment($content, $postID,$userID);
     }
-
-    // header("location: ../views/home_view.php?userID=$userID");
+    header("location: ../views/home_view.php?userID=$userID");
     
 ?>

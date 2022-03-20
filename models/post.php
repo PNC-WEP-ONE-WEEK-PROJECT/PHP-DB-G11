@@ -64,7 +64,6 @@ require_once('database.php');
         global $db;
         $statement = $db->query("SELECT * FROM allpostsinfo");
         $posts = $statement->fetchAll();
-        // print_r($posts);
         return $posts;
     }
 
@@ -112,8 +111,14 @@ require_once('database.php');
     function registerAccount($email, $firstName, $lastName, $password, $gender) 
     {
         global $db;
-        $statement = $db->query("insert into users(email, firstName, lastName, userPassword, gender)values('$email', '$firstName', '$lastName', '$password', '$gender');");
-        return $statement;
+        $statement = $db->prepare("insert into users(email, firstName, lastName, userPassword, gender) values(:email, :firstName, :lastName, :password, :gender);");
+        $statement->execute([
+            ':email' => $email,
+            ':firstName' => $firstName,
+            ':lastName' => $lastName,
+            ':password' => $password,
+            ':gender' => $gender
+        ]);
     }
 
     // GET USER INORMATION
@@ -128,4 +133,43 @@ require_once('database.php');
         $user = $statement->fetch();
         return $user;
     }
+
+    // GET POSTS OF USER BY USER-ID
+    function getUserPostsByUserId($userID)
+    {
+        global $db;
+        $statement = $db->prepare("SELECT * FROM allpostsinfo where user_ID=:userID ORDER BY postDate DESC");
+        $statement->execute([
+            ':userID' => $userID
+        ]);
+        $posts = $statement->fetchAll();
+        return $posts;
+    }
+
+    // GET USER BY ID 
+    function getUserById($userID)
+    {
+        global $db;
+        $statement = $db->prepare("select * from users where user_ID=:userID;");
+        $statement->execute([
+            ':userID' => $userID
+        ]);
+        $user = $statement->fetch();
+        return $user;
+    }
+
+    // UPDATE PROFILE
+    function updateProfileByUserID($userID, $firstName, $lastName, $gender, $dateOfBirth, $phone, $email)
+    {
+        global $db;
+        $statement = $db->query("update users set firstName='$firstName', lastName='$lastName', gender='$gender', dateOfBirth='$dateOfBirth', phone='$phone', email='$email' where user_ID=$userID;");
+    }
+
+    // INCREASE LIKE
+    function likePost($userID, $postID) 
+    {
+        global $db;
+        $statement = $db->query("INSERT INTO likes(user_ID, post_ID) VALUES($userID, $postID);");
+    }
+
 ?>
