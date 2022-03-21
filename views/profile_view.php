@@ -44,7 +44,7 @@ if (isset($_SESSION["userID"]) and !empty($_SESSION["userID"])) {
                 };
             ?></p>
             <p class="mb-0">Date of birth: <?php 
-                if ($user["dateOfBirth"] != "0000-00-00") {
+                if (!empty($user["dateOfBirth"]) and $user["dateOfBirth"] != "0000-00-00") {
                     $dates = $user["dateOfBirth"]; 
                     $newDate = new DateTime($dates);
                     echo $newDate->format("jS F Y");
