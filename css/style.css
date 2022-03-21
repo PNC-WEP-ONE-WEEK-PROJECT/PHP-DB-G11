@@ -64,7 +64,7 @@ a:hover {
     background: rgb(197, 195, 195);
     font-size: 25px;
     font-weight: bold;
-    height: 300px;
+    /* height: 300px; */
 }
 button{
     border-radius: 4px;
@@ -139,9 +139,28 @@ button{
     height: 300px;
     position: relative;
     border: none;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 
 }
+.content-comment {
+    align-items: center;
+}
+
+/* FRIENDS */
+.fri-menu-container {
+    position: sticky;
+    top: 60px;
+    z-index: 100000;
+}
+
+.btn-add-fri {
+    font-size: 13px;
+}
+
+.fr-show-height {
+    min-height: 80vh;
+}
+
 
 
 

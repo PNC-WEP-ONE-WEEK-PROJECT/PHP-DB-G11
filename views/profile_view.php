@@ -122,6 +122,45 @@ require_once("../templates/nav_bar.php");
                         <i class="material-icons">comment</i>
                         <span class="px-1"><?php echo $post["numberOfComments"]; ?> Comments</span>
                     </div>
+
+                        <?php require_once("../controllers/post_comment_controller.php"); ?>
+                    </div>
+                    <div  class="w-100 show-comment overflow-scroll mb-4">
+                        <div class="comment-controll w-100">
+                            <iframe name="comment" style="display:none;"></iframe>
+                            <form class="content-comment d-flex justify-content-end align-items-center" 
+                                action="../controllers/create_comment_controller.php?postID=<?php echo $post["post_ID"]?>&userID=<?php echo $post['user_ID']?>" method="post" >
+                                <a href="" class="me-1"><img class="img-pro rounded-circle" src="../images/man.png" alt=""></a>
+                                <input name="comment" class="w-100 rounded-pill ps-3 pt-1 pb-2 h-100" placeholder="Type here..."
+                                    type="text">
+                                <button class="bg-light" type="submit"><img class="img-send" src="../images/send.png" alt=""></button>
+                            </form>
+                            <hr>
+                        </div>
+                        <!-- GET COMMENTS -->
+                        <div class="">
+                            <?php
+                                foreach($comments as $comment) :
+                                    if($post['post_ID'] == $comment['post_ID']){
+                            ?>
+                            <div class="content-comment mt-3 d-flex justify-content-end">
+                                <a href="" class="me-1"><img class="img-pro rounded-circle" src="../images/logo.png" alt=""></a>
+                                <span class="rounded pt-0 px-2 h-100 border-2 border-primary bg-primary text-light">
+                                    <?php 
+                                        echo $comment['content'];
+                                    ?>
+                                </span>
+                                <form action="../controllers/delete_comment_controller.php" method="post"> 
+                                    <input type="hidden" value="<?php echo $comment['comment_ID']  ?>" name="comment_ID" id="">
+                                    <button type="submit"><i class="material-icons text-danger">delete_forever</i></button>
+                                </form> 
+                            </div>
+                            <?php
+                                };   
+                                endforeach 
+                            ?>
+                        </div>
+                    </div>
                 </div>
             </div>
 

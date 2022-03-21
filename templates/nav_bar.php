@@ -6,7 +6,7 @@
                     <a class="nav-link" href="../controllers/refresh_page_controller.php"><i class="material-icons menu-icon">home</i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href=""><i class="material-icons menu-icon">people</i></a>
+                    <a class="nav-link" href="../views/friends_view.php"><i class="material-icons menu-icon">people</i></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../views/profile_view.php"><i class="material-icons menu-icon">account_circle</i></a>

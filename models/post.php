@@ -172,4 +172,49 @@ require_once('database.php');
         $statement = $db->query("INSERT INTO likes(user_ID, post_ID) VALUES($userID, $postID);");
     }
 
+    // GET USERS WHO NOT FRIEND
+    function getAllUsersNotFriend($userID) {
+        global $db;
+        $statement = $db->prepare("SELECT user_ID FROM users where user_ID!=:userID and user_ID not in (SELECT friend_ID from friends where user_ID=:userID) order by user_ID desc");
+        $statement->execute([
+            ':userID' => $userID
+        ]);
+        $users = $statement->fetchAll();
+        return $users;
+    }
+
+    // GET USER WHO FRIEND
+    function getAllUsersWhoFriend($userID) 
+    {
+        global $db;
+        $statement = $db->prepare("SELECT friend_ID as 'user_ID' FROM friends where user_ID=:userID order by friendship_ID desc;");
+        $statement->execute([
+            ':userID' => $userID
+        ]);
+        $users = $statement->fetchAll();
+        return $users;
+    }
+
+    // ADD FRIEND
+    function addFriend($usreID, $friendID) 
+    {
+        global $db;
+        $statement = $db->prepare("insert into friends(user_ID, friend_ID) values(:userID, :friendID), (:friendID, :userID);");
+        $statement->execute([
+            ':userID' => $usreID,
+            ':friendID' => $friendID
+        ]);
+    }
+
+    // UNFRIEND
+    function unfriend($usreID, $friendID) 
+    {
+        global $db;
+        $statement = $db->prepare("DELETE FROM friends where user_ID=:userID and friend_ID=:friendID or user_ID=:friendID and friend_ID=:userID;");
+        $statement->execute([
+            ':userID' => $usreID,
+            ':friendID' => $friendID
+        ]);
+    }
+
 ?>
