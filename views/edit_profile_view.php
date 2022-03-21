@@ -14,12 +14,8 @@
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             require_once("../controllers/edit_profile_controller.php");
         };
-    ?>" method="post">
-        <div class="form-title d-flex justify-content-center"><p class="text-primary">UPDATE PROFILE</p></div>
-            <span class="img-text h-100 w-100 d-flex justify-content-center align-items-center">
-                <input class="h-100 w-100  upload-img ps-5" type="file" id="image" name="image">
-            </span>
-        </div>
+    ?>" method="post" enctype="multipart/form-data">
+        <div class="w-100 m-auto form-title d-flex justify-content-center"><p class="text-primary">UPDATE PROFILE</p></div>
         <label for="email">Email address</label>
         <input class="w-100 fill" id="email" type="text" placeholder="Email address" name="email" value="<?php echo $userInfo["email"]; ?>">
         <div class="w-100 fill-block">
@@ -52,8 +48,32 @@
                 <label for="Woman">Woman</label>
             </div>
         </div>
+        <div class="w-100 m-auto d-flex justify-content-between mt-3">
+            <div class="profile-upload d-flex flex-column">
+                <label class="bg-primary text-light py-1 px-3 cursor" for="profile_image">Upload profile image</label>
+                <input name="profile_image" onchange="showProfileUploaded(event)" class="upload-img" type="file" id="profile_image" hidden>
+                <img class="mt-2 profile-show profile-image-show ucrsor" src="../images/<?php if (!empty($userInfo["profile_image"])) { print_r($userInfo["profile_image"]); } ?>" alt="">
+            </div>
+            <div class="profile-upload d-flex flex-column">
+                <label class="bg-primary text-light py-1 px-3" for="cover_image">Upload cover image</label>
+                <input name="cover_image" onchange="showCoverUploaded(event)" class="upload-img" type="file" id="cover_image" hidden>
+                <img class="mt-2 img-show cover-image-show" src="../images/<?php if (!empty($userInfo["cover_image"])) { print_r($userInfo["cover_image"]); } ?>" alt="">
+            </div>
+
+            <script>
+                function showProfileUploaded(event) {
+                    var profileImage = document.querySelector(".profile-image-show");
+                    profileImage.src = URL.createObjectURL(event.target.files[0]);
+                }
+                function showCoverUploaded(event) {
+                    var coverImage = document.querySelector(".cover-image-show");
+                    coverImage.src = URL.createObjectURL(event.target.files[0]);
+                }
+            </script>
+
+        </div>
         <div class="d-flex justify-content-between">
-            <button class="p-2 save btn-warning db-button"><a href="profile_view.php">Cancel</a></button>
+            <a class="p-2 bg-warning db-button pointer" href="profile_view.php">Cancel</a>
             <button type="submit" class="p-2 save btn-primary db-button">SAVE</button>
         </div>
     </form>

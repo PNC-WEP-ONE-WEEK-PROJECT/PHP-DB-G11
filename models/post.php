@@ -159,10 +159,58 @@ require_once('database.php');
     }
 
     // UPDATE PROFILE
-    function updateProfileByUserID($userID, $firstName, $lastName, $gender, $dateOfBirth, $phone, $email)
+    function updateProfileByUserID($userID, $firstName, $lastName, $gender, $dateOfBirth, $phone, $email, $profile_image, $cover_image)
     {
         global $db;
-        $statement = $db->query("update users set firstName='$firstName', lastName='$lastName', gender='$gender', dateOfBirth='$dateOfBirth', phone='$phone', email='$email' where user_ID=$userID;");
+        if (!empty($profile_image['name']) and !empty($cover_image['name'])) {
+            $statement = $db->prepare("update users set firstName=:firstName, lastName=:lastName, gender=:gender, dateOfBirth=:dateOfBirth, phone=:phone, email=:email, profile_image=:profile_image, cover_image=:cover_image where user_ID=:userID;");
+            $statement->execute([
+                ':firstName' => $firstName,
+                ':lastName' => $lastName,
+                ':gender' => $gender,
+                ':dateOfBirth' => $dateOfBirth,
+                ':phone' => $phone,
+                ':email' => $email,
+                ':userID' => $userID,
+                ':profile_image' => uploadImage($profile_image),
+                ':cover_image' => uploadImage($cover_image)
+            ]);
+        } else if (empty($profile_image['name']) and !empty($cover_image['name'])) {
+            $statement = $db->prepare("update users set firstName=:firstName, lastName=:lastName, gender=:gender, dateOfBirth=:dateOfBirth, phone=:phone, email=:email, cover_image=:cover_image where user_ID=:userID;");
+            $statement->execute([
+                ':firstName' => $firstName,
+                ':lastName' => $lastName,
+                ':gender' => $gender,
+                ':dateOfBirth' => $dateOfBirth,
+                ':phone' => $phone,
+                ':email' => $email,
+                ':userID' => $userID,
+                ':cover_image' => uploadImage($cover_image)
+            ]);
+        } else if (empty($cover_image['name']) and !empty($profile_image['name'])) {
+            $statement = $db->prepare("update users set firstName=:firstName, lastName=:lastName, gender=:gender, dateOfBirth=:dateOfBirth, phone=:phone, email=:email, profile_image=:profile_image where user_ID=:userID;");
+            $statement->execute([
+                ':firstName' => $firstName,
+                ':lastName' => $lastName,
+                ':gender' => $gender,
+                ':dateOfBirth' => $dateOfBirth,
+                ':phone' => $phone,
+                ':email' => $email,
+                ':userID' => $userID,
+                ':profile_image' => uploadImage($profile_image)
+            ]);
+        } else {
+            $statement = $db->prepare("update users set firstName=:firstName, lastName=:lastName, gender=:gender, dateOfBirth=:dateOfBirth, phone=:phone, email=:email where user_ID=:userID;");
+            $statement->execute([
+                ':firstName' => $firstName,
+                ':lastName' => $lastName,
+                ':gender' => $gender,
+                ':dateOfBirth' => $dateOfBirth,
+                ':phone' => $phone,
+                ':email' => $email,
+                ':userID' => $userID
+            ]);
+        }
     }
 
     // INCREASE LIKE
