@@ -16,7 +16,6 @@ $comment = getCommentById($commentID);
         <button type="submit" class="w-50 p-2 btn-primary">Update</button>
     </div>
 </form>
-
 <?php
 require_once("../templates/footer.php");
 ?>

@@ -201,6 +201,7 @@ require_once("../templates/nav_bar.php");
                                 <form action="../controllers/delete_comment_controller.php" method="post"> 
                                     <input type="hidden" value="<?php echo $comment['comment_ID']  ?>" name="comment_ID" id="">
                                     <button type="submit"><i class="material-icons text-danger">delete_forever</i></button>
+                                    <a href="edit_comment_view.php?comment_ID=<?php echo $comment['comment_ID'] ?>"> <i class="text-primary material-icons">edit</i></a>
                                 </form> 
                             </div>
                             <?php
