@@ -1,6 +1,7 @@
 <?php session_start();
 require_once("../templates/header.php");
 require_once("../templates/nav_bar.php");
+if (isset($_SESSION["userID"]) and !empty($_SESSION["userID"])) {  
 ?>
 
 
@@ -8,7 +9,7 @@ require_once("../templates/nav_bar.php");
     <!-- FRIENDS SHOW -->
     <div>
         <!-- MENU -->
-        <div class="fri-menu-container d-flex mt-5">
+        <div class="fri-menu-container d-flex mt-5 bg-light py-2">
             <form action="../views/friends_view.php" method="post">
                 <input type="hidden" name="addFriends" value="addFriend">
                 <button class="btn btn-primary me-3 text-ligh">Other Users</button>
@@ -97,5 +98,8 @@ require_once("../templates/nav_bar.php");
 
 
 <?php
+} else {
+    header("location: ../index.php");
+}
 require_once("../templates/footer.php");
 ?>

@@ -3,6 +3,7 @@ require_once("../templates/header.php");
 ?>
     <!-- FROM TO REGISTER ACCOUNT -->
     <form class="py-5 m-4" action="" method="post">
+        <a href="../index.php"><i class="material-icons">arrow_back</i></a>
         <div class="form-title d-flex justify-content-center"><p class="text-primary">REGISTER ACCOUNT</p></div>
         <input class="w-100 fill" type="text" placeholder="Email address" name="email" value="<?php if (isset($_POST["email"])) { echo $_POST["email"]; }; ?>">
         <div class="w-100 fill-block">
