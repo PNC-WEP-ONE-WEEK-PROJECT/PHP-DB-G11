@@ -21,10 +21,13 @@
                 <textarea name="description" class=" w-100 border-0 add-text" id="" cols="auto"
                     placeholder="Your Caption Here" rows="auto"></textarea>
             </div>
-            <div class="w-100 add-photo d-flex justify-content-center align-items-center bg-secondary">
+            <div class="w-100 add-photo bg-secondary">
                 <span class="img-text h-100 w-100 d-flex justify-content-center align-items-center">
-                    <input class="h-100 w-100  upload-img ps-5" type="file" id="image" name="image">
+                    <input class="h-100 w-100  upload-img ps-5" onchange="loadFile(event)" type="file" id="image" name="image">
                 </span>
+            </div>
+            <div class="d-flex justify-content-center pt-3">
+                <img src="" style="max-height: 1000px;" class="w-100" id="img-post" alt="">
             </div>
             <div class="w-50 me-0 m-auto d-flex mt-3">
             <button class="btn-cancel-edit btn me-2" type="cancel"><a class="btn-secondary text-light" href="home_view.php">Cancel</a></button>
@@ -36,3 +39,11 @@
 <?php
 require_once("../templates/footer.php");
 ?>
+<!-- SHOW IMAGE WHEN UERS ADD TO THEIR POST-->
+<script>
+ var loadFile = function(event) {
+        var image = document.getElementById('img-post');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+
+</script>

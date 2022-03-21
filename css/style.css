@@ -50,9 +50,6 @@ a:hover {
 
 
 /* ADD POST */
-.add-photo{
-    height: 200px;
-}
 .add-text{
     height: auto;
     outline: none;
@@ -64,7 +61,6 @@ a:hover {
     background: rgb(197, 195, 195);
     font-size: 25px;
     font-weight: bold;
-    /* height: 300px; */
 }
 button{
     border-radius: 4px;

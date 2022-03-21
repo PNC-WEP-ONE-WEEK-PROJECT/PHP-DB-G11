@@ -36,7 +36,28 @@ function deleteComment($item_delete)
         return $statement->rowCount() == 1;
     }
 
+// EDIT COMMENTS
 
+function editComment($content, $commentID){
+    global $db;
+    $statement = $db->prepare('UPDATE comments set content = :content, commentDate = now() where comment_ID = :comment_ID;');
+    $statement -> execute([
+        ':content' => $content,
+        ":comment_ID" => $commentID
+    ]);
+    return $statement -> rowCount() ==1;
+}
+
+function getCommentById($commentID)
+    {
+        global $db;
+        $statement = $db->prepare("SELECT * FROM comments WHERE comment_ID=:comment_ID;");
+        $statement->execute([
+            ':comment_ID' => $commentID
+        ]);
+        $comment = $statement->fetch();
+        return $comment;
+    }
 
 
 

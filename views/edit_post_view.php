@@ -17,8 +17,11 @@
         ?>" method="post" enctype="multipart/form-data">
             <input type="hidden" value=<?php echo $post["post_ID"]; ?> name="postId">
             <textarea name="description" class=" w-100 border-0 add-text" id="" cols="auto" placeholder="Your Caption Here" rows="auto"><?php echo $post["description"]; ?></textarea>
-            <input class=" upload-img" type="file" id="image" name="image" value="<?php echo $post['image']; ?>">
-            <img class="w-100"  src="../images/<?php echo $post['image'] ?>" alt="" >
+            <input class=" upload-img" onchange="loadFile(event)" type="file" id="image" name="image" value="<?php echo $post['image']; ?>">
+            <img class="w-100" id="old-image"  src="../images/<?php echo $post['image'] ?>" alt="" >
+            <div class=" d-flex justify-content-center pt-3">
+                <img src="" class="w-100" id="img-post" alt="">
+            </div>
             <div class="w-50 me-0 m-auto d-flex">
                 <button class="btn-cancel-edit btn me-2" type="cancel"><a class="btn-secondary text-light" href="home_view.php">Cancel</a></button>
                 <button type="submit" class="w-100 p-2 btn-primary">Save</button>
@@ -29,3 +32,13 @@
 <?php
 require_once("../templates/footer.php");
 ?>
+
+<script>
+ var loadFile = function(event) {
+        old_image = document.getElementById('old-image');
+        old_image.style.display='none';
+        var new_image = document.getElementById('img-post');
+        new_image.src = URL.createObjectURL(event.target.files[0]);
+    };
+
+</script>
