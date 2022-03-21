@@ -21,16 +21,14 @@
                 <textarea name="description" class=" w-100 border-0 add-text" id="" cols="auto"
                     placeholder="Your Caption Here" rows="auto"></textarea>
             </div>
-            <div class="w-100 add-photo bg-secondary">
-                <span class="img-text h-100 w-100 d-flex justify-content-center align-items-center">
-                    <input class="h-100 w-100  upload-img ps-5" onchange="loadFile(event)" type="file" id="image" name="image">
-                </span>
+            <label for="image" class="cursor bg-primary text-light py-1 px-3 mb-2">Upload image</label>
+            <input class="h-100 w-100  upload-img ps-5" onchange="loadFile(event)" type="file" id="image" name="image" hidden>
+            <div class="upload-img-contain">
+                <img class="w-100" id="old-image"  src="../images/<?php echo $post['image'] ?>" alt="" >
+                <img src="" class="w-100" id="img-post" alt="">
             </div>
-            <div class="d-flex justify-content-center pt-3">
-                <img src="" style="max-height: 1000px;" class="w-100" id="img-post" alt="">
-            </div>
-            <div class="w-50 me-0 m-auto d-flex mt-3">
-            <button class="btn-cancel-edit btn me-2" type="cancel"><a class="btn-secondary text-light" href="home_view.php">Cancel</a></button>
+            <div class="w-50 me-0 m-auto d-flex py-3">
+                <button class="btn-cancel-edit btn me-2" type="cancel"><a class="btn-secondary text-light" href="home_view.php">Cancel</a></button>
                 <button type="submit" class="w-100 p-2 save btn-primary">Post</button>
             </div>
         </form>

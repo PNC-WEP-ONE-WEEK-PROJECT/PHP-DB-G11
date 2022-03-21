@@ -17,12 +17,13 @@
         ?>" method="post" enctype="multipart/form-data">
             <input type="hidden" value=<?php echo $post["post_ID"]; ?> name="postId">
             <textarea name="description" class=" w-100 border-0 add-text" id="" cols="auto" placeholder="Your Caption Here" rows="auto"><?php echo $post["description"]; ?></textarea>
-            <input class=" upload-img" onchange="loadFile(event)" type="file" id="image" name="image" value="<?php echo $post['image']; ?>">
-            <img class="w-100" id="old-image"  src="../images/<?php echo $post['image'] ?>" alt="" >
-            <div class=" d-flex justify-content-center pt-3">
+            <label for="image" class="cursor bg-primary text-light py-1 px-3 mb-2">Upload image</label>
+            <input hidden class=" upload-img" onchange="loadFile(event)" type="file" id="image" name="image" value="<?php echo $post['image']; ?>">
+            <div class="upload-img-contain">
+                <img class="w-100" id="old-image"  src="../images/<?php echo $post['image'] ?>" alt="" >
                 <img src="" class="w-100" id="img-post" alt="">
             </div>
-            <div class="w-50 me-0 m-auto d-flex">
+            <div class="w-50 me-0 m-auto d-flex mt-3">
                 <button class="btn-cancel-edit btn me-2" type="cancel"><a class="btn-secondary text-light" href="home_view.php">Cancel</a></button>
                 <button type="submit" class="w-100 p-2 btn-primary">Save</button>
             </div>

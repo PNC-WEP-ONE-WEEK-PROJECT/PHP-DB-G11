@@ -9,9 +9,10 @@ require_once('../models/post.php');
     $dateOfBirth = $_POST['dateOfBirth'];
     $phone = $_POST['phone'];
     $gender = $_POST["gender"];
+    $profile_image = $_FILES["profile_image"];
+    $cover_image = $_FILES["cover_image"];
 
-    updateProfileByUserID($userID, $firstName, $lastName, $gender, $dateOfBirth, $phone, $email);
-
+    updateProfileByUserID($userID, $firstName, $lastName, $gender, $dateOfBirth, $phone, $email, $profile_image, $cover_image);
     header("location: ../views/profile_view.php");
 
 ?>

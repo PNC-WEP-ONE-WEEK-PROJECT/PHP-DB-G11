@@ -14,9 +14,19 @@ require_once("../templates/nav_bar.php");
     <!-- PROFILE AND DETAILS -->
     <div class="mt-4 profile-container">
         <div class="profile-image-parent">
-            <div class="cover-image-container d-flex justify-content-center"><img class="cover-image" src="" width="<?php echo "0%"; ?>" height="<?php echo "0"; ?>"/></div>
+            <div class="cover-image-container d-flex justify-content-center"><img class="cover-image" src="../images/<?php if (!empty($user["cover_image"])) { echo $user["cover_image"]; } ?>" /></div>
             <div class="profile-image-container d-flex">
-                <div class="profile-image"><img class="img-circle" src="../images/<?php if($user["gender"] == "M") { echo "man.png"; } else { echo "woman.png"; } ?>" alt="" width="100%" heigh="100%"></div>
+                <div class="profile-image"><img class="img-circle" src="../images/<?php
+                    if (!empty($user["profile_image"])) {
+                        echo $user["profile_image"];
+                    } else {
+                        if($user["gender"] == "M") {
+                            echo "man.png"; 
+                        } else {
+                            echo "woman.png"; 
+                        } 
+                    }
+                ?>" alt="" width="100%" heigh="100%"></div>
                 <span class="mb-4 px-4"><?php echo $user["firstName"] . " " . $user["lastName"] ?></span>
             </div>
         </div>
@@ -64,7 +74,9 @@ require_once("../templates/nav_bar.php");
         // GET USER POSTS
         if (isset($_SESSION["userID"]) and !empty($_SESSION["userID"])) {
             require_once("../models/post.php");
+            $currentUser = getUserById($_SESSION["userID"]);
             $posts = getUserPostsByUserId($_SESSION["userID"]);
+            // $userDetails = getUserById($_SESSION["userID"]);
             if (!empty($posts)) {
                 foreach ($posts as $index => $post) {
         ?>
@@ -72,7 +84,17 @@ require_once("../templates/nav_bar.php");
             
                 <div class="card-header px-0 py-2 post-header border-0 w-100 d-flex justify-content-between">
                     <div class="post-owner d-flex w-100">
-                        <a class="profile-contain d-flex" href=""><img src="../images/<?php if($user["gender"] == "M") { echo "man.png"; } else { echo "woman.png"; } ?>" alt=""></a>
+                        <a class="profile-contain d-flex" href=""><img src="../images/<?php
+                            if (!empty($user["profile_image"])) {
+                                echo $user["profile_image"];
+                            } else {
+                                if($user["gender"] == "M") {
+                                    echo "man.png"; 
+                                } else {
+                                    echo "woman.png"; 
+                                } 
+                            }
+                        ?>" alt=""></a>
                         <div class="details">
                             <a class="user-name" href=""><?php echo $post["firstName"] . " " . $post["lastName"] ?></a>
                             <p class="m-0"><?php
@@ -130,7 +152,17 @@ require_once("../templates/nav_bar.php");
                             <iframe name="comment" style="display:none;"></iframe>
                             <form class="content-comment d-flex justify-content-end align-items-center" 
                                 action="../controllers/create_comment_controller.php?postID=<?php echo $post["post_ID"]?>&userID=<?php echo $post['user_ID']?>" method="post" >
-                                <a href="" class="me-1"><img class="img-pro rounded-circle" src="../images/man.png" alt=""></a>
+                                <a href="" class="me-1"><img class="img-pro rounded-circle" src="../images/<?php
+                                    if (!empty($currentUser["profile_image"])) {
+                                        echo $currentUser["profile_image"];
+                                    } else {
+                                        if($currentUser["gender"] == "M") {
+                                            echo "man.png"; 
+                                        } else {
+                                            echo "woman.png"; 
+                                        } 
+                                    }
+                                ?>" alt=""></a>
                                 <input name="comment" class="w-100 rounded-pill ps-3 pt-1 pb-2 h-100" placeholder="Type here..."
                                     type="text">
                                 <button class="bg-light" type="submit"><img class="img-send" src="../images/send.png" alt=""></button>
@@ -142,13 +174,29 @@ require_once("../templates/nav_bar.php");
                             <?php
                                 foreach($comments as $comment) :
                                     if($post['post_ID'] == $comment['post_ID']){
+                                        $user = getUserById($comment["user_ID"]);
                             ?>
                             <div class="content-comment mt-3 d-flex justify-content-end">
-                                <a href="" class="me-1"><img class="img-pro rounded-circle" src="../images/logo.png" alt=""></a>
-                                <span class="rounded pt-0 px-2 h-100 border-2 border-primary bg-primary text-light">
-                                    <?php 
+                                <a href="" class="me-1"><img class="img-pro rounded-circle" src="../images/<?php
+                                    if (!empty($user["profile_image"])) {
+                                        echo $user["profile_image"];
+                                    } else {
+                                        if($user["gender"] == "M") {
+                                            echo "man.png"; 
+                                        } else {
+                                            echo "woman.png"; 
+                                        } 
+                                    }
+                                ?>" alt=""></a>
+                                <span class="rounded pt-0 px-2 h-100 border-2 border-primary bg-primary">
+                                    <div class="text-light"><?php 
                                         echo $comment['content'];
-                                    ?>
+                                    ?></div>
+                                    <div class="comment-date"><?php 
+                                        $dates = $comment['commentDate'];
+                                        $newDate = new DateTime($dates);
+                                        echo $newDate->format("jS F Y");
+                                    ?></div>
                                 </span>
                                 <form action="../controllers/delete_comment_controller.php" method="post"> 
                                     <input type="hidden" value="<?php echo $comment['comment_ID']  ?>" name="comment_ID" id="">

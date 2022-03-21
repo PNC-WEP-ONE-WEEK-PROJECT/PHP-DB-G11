@@ -8,6 +8,7 @@ require_once("btn_add_post_view.php");
 // CALL FUNCTION OF POST INFORMATION
 require_once("../models/post.php");
 if (isset($_SESSION["userID"]) and !empty($_SESSION["userID"])) {
+    $currentUser = getUserById($_SESSION["userID"]);
     $posts = getPosts();
     if (!empty($posts)) {
         foreach ($posts as $index => $post) {
@@ -16,8 +17,17 @@ if (isset($_SESSION["userID"]) and !empty($_SESSION["userID"])) {
 <div class="card w-100 post border-0 mt-3">
     <div class="card-header px-0 py-2 post-header border-0 w-100 d-flex justify-content-between">
         <div class="post-owner d-flex w-100">
-            <a class="profile-contain d-flex" href=""><img
-                    src="../images/<?php if($user["gender"] == "M") { echo "man.png"; } else { echo "woman.png"; }; ?>"
+            <a class="profile-contain d-flex" href=""><img src="../images/<?php
+                if (!empty($user["profile_image"])) {
+                    echo $user["profile_image"];
+                } else {
+                    if($user["gender"] == "M") {
+                        echo "man.png"; 
+                    } else {
+                        echo "woman.png"; 
+                    } 
+                }
+            ?>"
                     alt=""></a>
             <div class="details">
                 <a class="user-name" href=""><?php echo $post["firstName"]  . " " . $post["lastName"] ?></a>
@@ -75,7 +85,17 @@ if (isset($_SESSION["userID"]) and !empty($_SESSION["userID"])) {
             <iframe name="comment" style="display:none;"></iframe>
             <form class="content-comment d-flex justify-content-end align-items-center" 
                 action="../controllers/create_comment_controller.php?postID=<?php echo $post["post_ID"]?>" method="post" >
-                <a href="" class="me-1"><img class="img-pro rounded-circle" src="../images/man.png" alt=""></a>
+                <a href="" class="me-1"><img class="img-pro rounded-circle" src="../images/<?php
+                    if (!empty($currentUser["profile_image"])) {
+                        echo $currentUser["profile_image"];
+                    } else {
+                        if($currentUser["gender"] == "M") {
+                            echo "man.png"; 
+                        } else {
+                            echo "woman.png"; 
+                        } 
+                    }
+                ?>" alt=""></a>
                 <input name="comment" class="w-100 rounded-pill ps-3 pt-1 pb-2 h-100" placeholder="Type here..."
                     type="text">
                 <button class="bg-light" type="submit"><img class="img-send" src="../images/send.png" alt=""></button>
@@ -87,13 +107,29 @@ if (isset($_SESSION["userID"]) and !empty($_SESSION["userID"])) {
             <?php
                 foreach($comments as $comment) :
                     if($post['post_ID'] == $comment['post_ID']){
+                        $user = getUserById($comment["user_ID"]);
             ?>
             <div class="content-comment mt-3 d-flex justify-content-end">
-                <a href="" class="me-1"><img class="img-pro rounded-circle" src="../images/logo.png" alt=""></a>
+                <a href="" class="me-1"><img class="img-pro rounded-circle" src="../images/<?php
+                    if (!empty($user["profile_image"])) {
+                        echo $user["profile_image"];
+                    } else {
+                        if($user["gender"] == "M") {
+                            echo "man.png"; 
+                        } else {
+                            echo "woman.png"; 
+                        } 
+                    }
+                ?>" alt=""></a>
                 <span class="rounded pt-0 px-2 h-100 border-2 border-primary bg-primary text-light">
-                    <?php 
+                    <div class="text-light"><?php 
                         echo $comment['content'];
-                    ?>
+                    ?></div>
+                    <div class="comment-date"><?php 
+                        $dates = $comment['commentDate'];
+                        $newDate = new DateTime($dates);
+                        echo $newDate->format("jS F Y");
+                    ?></div>
                 </span>
                 <form action="../controllers/delete_comment_controller.php" method="post"> 
                     <input type="hidden" value="<?php echo $comment['comment_ID']  ?>" name="comment_ID" id="">
