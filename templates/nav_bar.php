@@ -1,6 +1,18 @@
 <!-- NAVIGATION BAR -->
         <nav id="navigation" class="navbar py-0 bg-light">
-            <a class="navbar-brand px-3" href="../controllers/refresh_page_controller.php"><img class="logo" src="../images/logo.png" alt=""></a>
+            <div>
+                <a class="navbar-brand px-3" href="../controllers/refresh_page_controller.php"><img class="logo" src="../images/logo.png" alt=""></a>
+                <div class="btn-group">
+                    <button type="button" class="bg-light text-primary" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="material-icons " style="font-size:36px">search</i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-start search">
+                        <form class="d-flex">
+                            <input class="form-control me-2" type="text" id="search-post" placeholder="Search">
+                        </form>
+                    </ul>
+                </div>
+            </div>
             <ul class="nav nav-pills d-flex justify-content-between" id="nav-menu">
                 <li class="nav-item">
                     <a class="nav-link" href="../controllers/refresh_page_controller.php"><i class="material-icons menu-icon">home</i></a>
