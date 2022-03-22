@@ -48,4 +48,16 @@ function validate_password($password, $cfpassword)
     return $isValidPassword;
 }
 
+// PHONE
+function validate_phone($phone) 
+{
+    $isValidPhone = FALSE;
+    if (!empty($phone)) {
+        if (strlen($phone) >= 9 and strlen($phone) <= 12) {
+            $isValidPhone = TRUE;
+        }
+    }
+    return $isValidPhone;
+}
+
 ?>

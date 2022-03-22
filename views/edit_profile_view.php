@@ -1,6 +1,70 @@
 <?php session_start();
     require_once("../templates/header.php");
+    require_once("../models/validation.php");
 ?>
+
+
+<?php
+
+$error_email = "";
+$error_username = "";
+$error_phone = "";
+
+
+$isCanUpdate = FALSE;
+
+// CHECK IF EMAIL IS VALID
+if (isset($_POST["email"])) {
+    if (!empty($_POST["email"])) {
+        $valid_email = validate_email($_POST["email"]);
+        if (!$valid_email) {
+            $error_email = "Wrong email, email must contains @";
+        }
+    } else {
+        $error_email = "Please input email";
+    }
+}
+
+// CHECK IF FIRSTNAME AND LASTNAME IS VALID
+if (isset($_POST["firstName"]) and isset($_POST["lastName"])) {
+    if (!empty($_POST["firstName"]) and !empty($_POST["lastName"])) {
+        $valid_username = validate_username($_POST["firstName"], $_POST["lastName"]);
+        if (!$valid_username) {
+            $error_username = "Username must not containts special characters";
+        }
+    } else {
+        $error_username = "Please input both firstname and lastname";
+    }
+}
+
+// CHECK PHONE NUMBER
+if (isset($_POST["phone"])) {
+    if (!empty($_POST["phone"])) {
+        $valid_phone = validate_phone($_POST["phone"]);
+        if (!$valid_phone) {
+            $error_phone = "Phone number must be 9-12 characters";
+        }
+    } else {
+        $error_phone = "Please input phone number";
+    }
+}
+
+// CHECK IF ALL VALID => CAN UPDATE
+if (isset($valid_email) and isset($valid_username) and isset($valid_phone)) {
+    if ($valid_email and $valid_username and $valid_phone) {
+        $isCanUpdate = TRUE;
+    }
+}
+
+if ($isCanUpdate) {
+    require_once("../controllers/edit_profile_controller.php");
+}
+
+?>
+
+
+
+
 
     <?php
     // GET USER INFORMATION
@@ -10,23 +74,45 @@
 
     ?>
 
-    <form class="py-5 m-4" action="<?php
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            require_once("../controllers/edit_profile_controller.php");
-        };
-    ?>" method="post" enctype="multipart/form-data">
+    <form class="py-5 m-4" action="../views/edit_profile_view.php" method="post" enctype="multipart/form-data">
         <div class="w-100 m-auto form-title d-flex justify-content-center"><p class="text-primary">UPDATE PROFILE</p></div>
         <label for="email">Email address</label>
-        <input class="w-100 fill" id="email" type="text" placeholder="Email address" name="email" value="<?php echo $userInfo["email"]; ?>">
+        <input class="w-100 fill" id="email" type="text" placeholder="Email address" name="email" value="<?php 
+            if (isset($_POST["email"])) {
+                if (!empty($_POST["email"])) {
+                    echo $_POST["email"];
+                }
+            } else { 
+                echo $userInfo["email"]; 
+            }
+        ?>">
+        <small class="text-danger"><?php echo $error_email; ?></small>
         <div class="w-100 fill-block">
             <div>
                 <label for="firstname">First name</label>
-                <input class="w-100 fill"  id="firstname" name="firstName" type="text" placeholder="First name" value="<?php echo $userInfo["firstName"]; ?>">
+                <input class="w-100 fill"  id="firstname" name="firstName" type="text" placeholder="First name" value="<?php
+                    if (isset($_POST["firstName"])) {
+                        if (!empty($_POST["firstName"])) {
+                            echo $_POST["firstName"];
+                        }
+                    } else { 
+                        echo $userInfo["firstName"]; 
+                    }
+                ?>">
             </div>
             <div>
                 <label for="lastname">Last name</label>
-                <input class="w-100 fill"  id="lastname" name="lastName" type="text" placeholder="Last name" value="<?php echo $userInfo["lastName"]; ?>">
+                <input class="w-100 fill"  id="lastname" name="lastName" type="text" placeholder="Last name" value="<?php 
+                    if (isset($_POST["email"])) {
+                        if (!empty($_POST["lastName"])) {
+                            echo $_POST["lastName"];
+                        }
+                    } else { 
+                        echo $userInfo["lastName"]; 
+                    } 
+                ?>">
             </div>
+            <small class="text-danger"><?php echo $error_username; ?></small>
         </div>
         <div class="w-100 fill-block">
             <div>
@@ -35,7 +121,16 @@
             </div>
             <div>
                 <label for="phone">Phone number</label>
-                <input class="w-100 fill" name="phone"  id="phone" type="numbers" placeholder="Phone number" value="<?php echo $userInfo["phone"]; ?>">
+                <input class="w-100 fill" name="phone"  id="phone" type="numbers" placeholder="Phone number" value="<?php 
+                    if (isset($_POST["phone"])) {
+                        if (!empty($_POST["phone"])) {
+                            echo $_POST["phone"];
+                        }
+                    } else { 
+                        echo $userInfo["phone"]; 
+                    }
+                ?>">
+                <small class="text-danger"><?php echo $error_phone; ?></small>
             </div>
         </div>
         <div class="d-flex mt-4">
