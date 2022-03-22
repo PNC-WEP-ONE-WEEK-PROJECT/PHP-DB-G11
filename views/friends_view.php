@@ -42,7 +42,17 @@ if (isset($_SESSION["userID"]) and !empty($_SESSION["userID"])) {
             <!-- DISPLAY USERS OR FRIEND -->
             <div onclick="hideFriend(<?php echo $index; ?>)" style="visibility:visible;" class="d-flex post-footer justify-content-between AFriend" id="$index">
                 <div class="d-flex post-footer ms-4 mt-4">
-                    <a class="" href=""><img width="50" height="50" src="../images/<?php if($user["gender"] == "M") { echo "man.png"; } else { echo "woman.png"; }; ?>" alt=""></a>
+                    <a class="profile-contain" href=""><img width="50" height="50" src="../images/<?php 
+                        if (!empty($user["profile_image"])) {
+                            echo $user["profile_image"];
+                        } else {
+                            if($user["gender"] == "M") { 
+                                echo "man.png"; 
+                            } else { 
+                                echo "woman.png"; 
+                            }; 
+                        }
+                    ?>" alt=""></a>
                     <a class="ms-3 user-name" href=""><?php echo $user["firstName"]  . " " . $user["lastName"] ?></a>
                 </div>
                 <iframe name="friend" style="display:none;"></iframe>
