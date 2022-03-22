@@ -177,4 +177,7 @@ require_once("../templates/footer.php");
         document.querySelectorAll(".numberOfLikes")[number].textContent = parseInt(currentLike) + 1;
         document.querySelectorAll(".like-icon")[number].style.color = "blue";
     }
+    var home = document.querySelector(".home-page");
+    home.style.color = "red";
+    home.style.borderBottom = "solid 3px red";
 </script>

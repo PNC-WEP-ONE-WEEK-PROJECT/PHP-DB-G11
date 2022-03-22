@@ -254,6 +254,15 @@ if (isset($_SESSION["userID"]) and !empty($_SESSION["userID"])) {
 
     </div>
 
+
+<script>
+
+    var profile = document.querySelector(".profile-page");
+    profile.style.color = "red";
+    profile.style.borderBottom = "solid 3px red";
+
+</script>
+
 <?php
 } else {
     header("location: ../index.php");

@@ -104,6 +104,13 @@ if (isset($_SESSION["userID"]) and !empty($_SESSION["userID"])) {
 
 
 
+<script>
+
+    var friend = document.querySelector(".friend-page");
+    friend.style.color = "red";
+    friend.style.borderBottom = "solid 3px red";
+
+</script>
 
 
 
