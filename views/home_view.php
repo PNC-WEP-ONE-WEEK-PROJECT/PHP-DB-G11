@@ -166,39 +166,12 @@ if (isset($_SESSION["userID"]) and !empty($_SESSION["userID"])) {
     };
 };
 ?>
-
-    <!-- FOOTER -->
+<!-- FOOTER -->
     <?php
 } else {
     header("location: ../index.php");
 }
 require_once("../templates/footer.php");
 ?>
-
-    <!-- SCRIPT TO INCREASE LIKE AND CHANGE COLOR-->
-    <script>
-    function increaseLike(number) {
-        currentLike = document.querySelectorAll(".numberOfLikes")[number].textContent;
-        document.querySelectorAll(".numberOfLikes")[number].textContent = parseInt(currentLike) + 1;
-        document.querySelectorAll(".like-icon")[number].style.color = "blue";
-    }
-
-
-    var search = document.querySelector('#search-post');
-    search.addEventListener('keyup', function(e) {
-        let text = search.value.toLowerCase();
-        const itemPosts = document.querySelectorAll('#controll-post');
-        for (let post of itemPosts) {
-            let title = post.children[1].firstElementChild.textContent.toLocaleLowerCase();
-            // console.log(post)
-            if (title.indexOf(text) === -1) {
-                console.log(title.indexOf(text))
-                post.style.display = "none"
-            } else {
-                post.style.display = "block"
-                console.log(title.indexOf(text))
-
-            }
-        }
-    })
-    </script>
+<!-- SCRIPT TO INCREASE LIKE AND CHANGE COLOR-->
+<script src="../js/search_and_like.js"></script>
