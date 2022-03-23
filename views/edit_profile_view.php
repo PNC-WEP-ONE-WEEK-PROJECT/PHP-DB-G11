@@ -30,7 +30,7 @@ if (isset($_POST["firstName"]) and isset($_POST["lastName"])) {
     if (!empty($_POST["firstName"]) and !empty($_POST["lastName"])) {
         $valid_username = validate_username($_POST["firstName"], $_POST["lastName"]);
         if (!$valid_username) {
-            $error_username = "Username must not containts special characters";
+            $error_username = "Username must not containts special characters or space";
         }
     } else {
         $error_username = "Please input both firstname and lastname";
@@ -44,17 +44,19 @@ if (isset($_POST["phone"])) {
         if (!$valid_phone) {
             $error_phone = "Phone number must be 9-12 characters";
         }
-    } else {
-        $error_phone = "Please input phone number";
     }
 }
 
-// CHECK IF ALL VALID => CAN UPDATE
 if (isset($valid_email) and isset($valid_username) and isset($valid_phone)) {
     if ($valid_email and $valid_username and $valid_phone) {
         $isCanUpdate = TRUE;
     }
+} else if (isset($valid_email) and isset($valid_username) and !isset($valid_phone)) {
+    if ($valid_email and $valid_username) {
+        $isCanUpdate = TRUE;
+    }
 }
+
 
 if ($isCanUpdate) {
     require_once("../controllers/edit_profile_controller.php");
